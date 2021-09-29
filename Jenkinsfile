@@ -15,11 +15,9 @@ node{
       }
    
    stage("deploy"){
-      sh "echo hi"
       
    sshagent(credentials: ['deploy-tomcat'], ignoreMissing: true) {
-      sh "scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/pipelinedeploytomcat/target/JenkinsWar.war ec2-user@
-172.31.13.180:/opt/apache-tomcat-10.0.11/webapps"
+      sh "scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/pipelinedeploytomcat/target/JenkinsWar.war ec2-user@172.31.13.180:/opt/apache-tomcat-10.0.11/webapps"
 }
    }
 /*   stage ('Stop Tomcat Server') {
