@@ -10,8 +10,18 @@ node{
       // Get maven home path
       /*def mvnHome =  tool name: 'maven-3', type: 'maven'  */ 
     /*  bat "${mvnHome}/bin/mvn package"*/
+      
      sh  "mvn clean install package"
       }
+   
+   stage("deploy"){
+      
+   sshagent(credentials: ['deploy-tomcat'], ignoreMissing: true) {
+      
+    sh "scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/pipelinedeploytomcat/target/JenkinsWar.war ec2-user@
+172.31.13.180:/opt/apache-tomcat-10.0.11/webapps"
+}
+   }
 /*   stage ('Stop Tomcat Server') {
                bat ''' @ECHO OFF
                wmic process list brief | find /i "tomcat" > NUL
