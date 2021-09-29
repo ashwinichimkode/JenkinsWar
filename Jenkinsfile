@@ -10,7 +10,7 @@ node{
       // Get maven home path
       /*def mvnHome =  tool name: 'maven-3', type: 'maven'  */ 
     /*  bat "${mvnHome}/bin/mvn package"*/
-      mvn clean install package
+     sh  "mvn clean install package"
       }
 /*   stage ('Stop Tomcat Server') {
                bat ''' @ECHO OFF
